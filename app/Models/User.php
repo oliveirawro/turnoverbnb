@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'scope_type',
+        'scope_id',
     ];
 
     /**
@@ -41,4 +43,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scope()
+    {
+        return $this->morphTo();
+    }
+
+    public function is_admin()
+    {
+        return $this->scope_type == Admin::class;
+    }
+
+    public function is_customer()
+    {
+        return $this->scope_type == Customer::class;
+    }
 }

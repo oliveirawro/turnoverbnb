@@ -20,6 +20,8 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'scope_type' => null,
+            'scope_id' => null
         ];
     }
 
@@ -33,6 +35,34 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'email_verified_at' => null,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the user scope is Admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function admin()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'scope_type' => 'admin',
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the user scope is Customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function customer()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'scope_type' => 'customer',
             ];
         });
     }
